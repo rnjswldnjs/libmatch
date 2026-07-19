@@ -443,11 +443,11 @@ header {
 }
 .book-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 .tag {
-  font-size: 11.5px;
-  color: var(--mint-dark);
-  background: var(--mint-light);
-  padding: 3px 10px;
-  border-radius: 12px;
+  font-size: 11px;
+  color: var(--gray);
+  background: var(--gray-light);
+  padding: 2px 9px;
+  border-radius: 10px;
   font-weight: 600;
 }
 
@@ -1885,7 +1885,7 @@ function updateWeights() {
   document.getElementById('alphaVal').textContent = alpha;
   document.getElementById('betaVal').textContent = beta;
   document.getElementById('cfVal').textContent = cf;
-  grep -n "updateWeights" index.html
+  showToast('가중치가 업데이트됐어요. 다시 추천받아보세요');
 }
 
 /* ══════════════ 정렬 ══════════════ */
@@ -1965,8 +1965,8 @@ function renderBookList(list, containerId) {
 
 /* ══════════════ 검색 (탭1) ══════════════ */
 function quickSearch(q) {
-  document.getElementById('cfVal').textContent = ((100-a-b)/100).toFixed(1);
-  showToast('가중치가 업데이트됐어요. 다시 추천받아보세요');
+  document.getElementById('bookInput').value = q;
+  searchBook();
 }
 
 function searchBook() {
