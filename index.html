@@ -9,7 +9,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --black: #0a0a0a;
-  --white: #ffffff;
+  --white: #f7f7f5;
   --mint: #3ECFB2;
   --mint-dark: #2BA891;
   --mint-light: #E8FAF6;
@@ -19,6 +19,7 @@
   --dark-gray: #374151;
   --amber: #F59E0B;
   --amber-light: #FEF3C7;
+  --footer-bg: #1c1c1c;
 }
 html { scroll-behavior: smooth; }
 body {
@@ -145,21 +146,14 @@ header {
 
 /* ── 히어로 ── */
 .hero {
-  background: var(--black);
-  color: var(--white);
+  background: linear-gradient(135deg, #f7f7f5 0%, #e8faf6 60%, #c8f0e8 100%);
+  color: var(--black);
   padding: 56px 24px 96px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(62,207,178,0.18) 0%, transparent 70%);
-}
+.hero::before { display: none; }
 .hero h1 {
   font-size: 36px;
   font-weight: 800;
@@ -167,7 +161,7 @@ header {
   margin-bottom: 12px;
 }
 .hero h1 .accent { color: var(--mint); }
-.hero p { font-size: 15.5px; color: #9ca3af; }
+.hero p { font-size: 15.5px; color: var(--gray); }
 .hero-stats {
   display: flex;
   justify-content: center;
@@ -178,7 +172,7 @@ header {
 .hero-stats span {
   background: rgba(62,207,178,0.12);
   border: 1px solid rgba(62,207,178,0.3);
-  color: #e5e7eb;
+  color: var(--dark-gray);
   font-size: 12.5px;
   font-weight: 700;
   padding: 6px 14px;
@@ -1116,7 +1110,7 @@ body.admin-mode header { border-bottom: 2px solid var(--mint); }
 
 /* ── 푸터 ── */
 footer {
-  background: var(--black);
+  background: var(--footer-bg);
   color: var(--gray);
   text-align: center;
   padding: 26px 24px;
