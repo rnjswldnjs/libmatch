@@ -718,18 +718,25 @@ header {
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.14);
 }
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 .shelf-ph {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
   text-align: center;
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 900;
+  font-size: 16px;
   line-height: 1.5;
-  color: var(--dark-gray);
+  color: var(--white);
   word-break: keep-all;
   background: linear-gradient(160deg, #e8faf6 0%, #d0f0e8 55%, #a8e4d4 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 4s ease infinite;
 }
 .shelf-title {
   margin-top: 9px;
@@ -2457,17 +2464,22 @@ function makeShelfCard(book) {
     coverEl = `<img class="shelf-cover" src="${book.img}" alt="${book.title}" onerror="this.outerHTML='<div class=\\'shelf-cover shelf-ph\\'>${book.title.slice(0,18)}</div>'">`;
  } else {
     const colors = [
-      'linear-gradient(135deg, #FF6B6B, #FF8E53)',
-      'linear-gradient(135deg, #4FACFE, #00F2FE)',
-      'linear-gradient(135deg, #43E97B, #38F9D7)',
-      'linear-gradient(135deg, #FA709A, #FEE140)',
-      'linear-gradient(135deg, #A18CD1, #FBC2EB)',
-      'linear-gradient(135deg, #F77062, #FE5196)',
-      'linear-gradient(135deg, #4481EB, #04BEFE)',
-      'linear-gradient(135deg, #F093FB, #F5576C)',
+      'linear-gradient(160deg, #ff6b6b 0%, #ffa07a 40%, #ffcc80 100%)',
+      'linear-gradient(160deg, #2d6cdf 0%, #3ecfb2 50%, #56e0a0 100%)',
+      'linear-gradient(160deg, #f953c6 0%, #ff6b6b 50%, #ff9a44 100%)',
+      'linear-gradient(160deg, #1a1a5e 0%, #2d6cdf 50%, #56ccf2 100%)',
+      'linear-gradient(160deg, #f7971e 0%, #ffd200 100%)',
+      'linear-gradient(160deg, #ee0979 0%, #ff6a00 100%)',
+      'linear-gradient(160deg, #134e5e 0%, #71b280 100%)',
+      'linear-gradient(160deg, #8e2de2 0%, #4a00e0 50%, #2d6cdf 100%)',
     ];
     const color = colors[Math.abs(book.title.charCodeAt(0) + book.title.charCodeAt(1)) % colors.length];
-    coverEl = `<div class="shelf-cover shelf-ph" style="background:${color}">${book.title.split(' :')[0].slice(0,12)}</div>`;
+    const shortTitle = book.title.split(' :')[0];
+    const words = shortTitle.split(' ');
+    const mid = Math.ceil(words.length / 2);
+    const line1 = words.slice(0, mid).join(' ');
+    const line2 = words.slice(mid).join(' ');
+    coverEl = `<div class="shelf-cover shelf-ph" style="background:${color}; background-size:200% 200%;">${line1}<br>${line2}</div>`;
   }
 
   btn.innerHTML = `
