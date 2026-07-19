@@ -168,7 +168,36 @@ header {
 }
 .hero h1 .accent { color: var(--mint); }
 .hero p { font-size: 15.5px; color: #9ca3af; }
-
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.hero-stats span {
+  background: rgba(62,207,178,0.12);
+  border: 1px solid rgba(62,207,178,0.3);
+  color: #e5e7eb;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.hero-scroll-hint {
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--mint);
+  font-weight: 700;
+  cursor: pointer;
+  animation: hintBounce 1.6s ease-in-out infinite;
+  letter-spacing: 0.02em;
+}
+@keyframes hintBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(5px); opacity: 1; }
+}
+  
 /* ── 탭 ── */
 .tab-wrap {
   max-width: 860px;
@@ -1228,6 +1257,14 @@ body.a11y .regenre .chip { font-size: 14.5px; }
 <div class="hero">
   <h1>다음에 읽을 책, <span class="accent">도서관 데이터</span>가 알고 있어요</h1>
   <p>개인정보 없이, 전국 공공도서관의 대출 패턴으로 추천합니다</p>
+  <div class="hero-stats">
+    <span>전국 1,400개+ 도서관</span>
+    <span>대출 데이터 800권+</span>
+    <span>프라이버시 보존형</span>
+  </div>
+  <div class="hero-scroll-hint" onclick="document.getElementById('homeSection').scrollIntoView({behavior:'smooth'})">
+    오늘의 서가 둘러보기 ↓
+  </div>
 </div>
 
 <div class="tab-wrap">
@@ -1248,11 +1285,11 @@ body.a11y .regenre .chip { font-size: 14.5px; }
   <!-- ══ 탭1: 책으로 찾기 ══ -->
   <div class="panel active" id="panel-book">
     <div class="search-row">
-      <input type="text" class="search-input" id="bookInput" placeholder="읽은 책 제목을 입력하세요" onkeydown="if(event.key==='Enter')searchBook()">
+      <input type="text" class="search-input" id="bookInput" placeholder="예: 소년이 온다, 돈의 심리학, 흔한 남매" onkeydown="if(event.key==='Enter')searchBook()">
       <button class="btn-primary" onclick="searchBook()">추천받기</button>
     </div>
     <div class="search-hint">
-      이런 책은 어때요?
+      데모에서 검색 가능한 책:
       <span class="chip" onclick="quickSearch('소년이 온다')">소년이 온다</span>
       <span class="chip" onclick="quickSearch('돈의 심리학')">돈의 심리학</span>
       <span class="chip" onclick="quickSearch('흔한 남매')">흔한 남매</span>
@@ -1294,7 +1331,7 @@ body.a11y .regenre .chip { font-size: 14.5px; }
         <button class="option-btn" onclick="selectAge('20대')">20대</button>
         <button class="option-btn" onclick="selectAge('40대')">40대</button>
         <button class="option-btn" onclick="selectAge('60대 이상')">60대 이상</button>
-        <button class="option-btn" style="opacity:0.45; cursor:default;">10 · 30 · 50대<small>데모에서는 준비 중</small></button>
+        <button class="option-btn" style="opacity:0.55; cursor:default;">10 · 30 · 50대<small>출시 시 확대 예정</small></button>
       </div>
     </div>
 
@@ -2070,7 +2107,7 @@ function buildGenreGrid() {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     if (!available) btn.style.opacity = '0.45';
-    btn.innerHTML = available ? g : `${g}<small>데모에서는 준비 중</small>`;
+    btn.innerHTML = available ? g : `${g}<small>출시 시 확대 예정</small>`;
     if (available) {
       btn.onclick = () => selectGenre(g);
     } else {
