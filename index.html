@@ -343,7 +343,7 @@ header {
   transition: all 0.15s;
 }
 .sort-tab:hover { border-color: var(--mint); }
-.sort-tab.active { background: var(--black); color: var(--mint); border-color: var(--black); }
+.sort-tab.active { background: var(--mint); color: var(--black); border-color: var(--mint); }
 .share-btn {
   padding: 8px 15px;
   border: 1.5px solid var(--gray-border);
@@ -2165,7 +2165,7 @@ function renderProfileResults() {
   if (data.notInLibrary && data.notInLibrary.length) {
     notEl.innerHTML = `
       <div class="section-divider">
-        <h3>📦 도서관에는 아직 없지만 — 함께 찾는 책</h3>
+        <h3>도서관에는 아직 없지만 — 함께 찾는 책</h3>
         <p>같이 대출된 패턴이 높지만 현재 소장되지 않은 도서예요. 희망 신청하면 우선 구입을 검토해요.</p>
       </div>
       ${data.notInLibrary.map((t, i) => `
@@ -2194,7 +2194,7 @@ function buildRegenreArea() {
 
   el.innerHTML = `
     <div class="rg-title">다른 장르도 살펴볼까요?</div>
-    <span class="regenre-chip chip go" onclick="editStep('age')" style="display:inline-block;background:var(--black);color:var(--mint);border:1.5px solid var(--black);border-radius:20px;padding:6px 15px;margin:3px 4px 3px 0;cursor:pointer;font-size:12.5px;font-weight:700;">← 연령대 다시 고르기</span>
+    <span class="regenre-chip chip go" onclick="editStep('age')" style="display:inline-block;background:var(--mint);color:var(--black);border:1.5px solid var(--mint);border-radius:20px;padding:6px 15px;margin:3px 4px 3px 0;cursor:pointer;font-size:12.5px;font-weight:700;">← 연령대 다시 고르기</span>
     ${otherGenres.map(g => {
       const avail = availableForAge.includes(g);
       return `<span class="chip${avail ? '' : ' dim'}" onclick="${avail ? `rerunGenre('${g}')` : `showToast('${g} 장르는 데모에서 준비 중이에요')`}">${g}</span>`;
