@@ -290,6 +290,75 @@ header {
   background: var(--mint-light);
   border-color: var(--mint);
 }
+  /* 지금 뜨는 도서 */
+.trending-section { margin-bottom: 32px; }
+.trending-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; color: var(--black); }
+.trending-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+}
+.trending-scroll::-webkit-scrollbar { height: 0; }
+.trending-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 100px;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+.trending-card:hover .trending-cover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.trending-cover {
+  width: 100px;
+  height: 142px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--gray-border);
+  background: var(--gray-light);
+  transition: all 0.2s;
+  display: block;
+}
+.trending-cover-ph {
+  width: 100px;
+  height: 142px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  padding: 10px;
+  word-break: keep-all;
+  line-height: 1.4;
+  transition: all 0.2s;
+}
+.trending-rank {
+  position: absolute;
+  bottom: 24px;
+  left: -8px;
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  -webkit-text-stroke: 2px var(--gray-border);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+.trending-name {
+  margin-top: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--dark-gray);
+  line-height: 1.4;
+  word-break: keep-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* 검색 결과 없음 가이드 */
 .no-result {
@@ -1300,6 +1369,7 @@ body.a11y .regenre .chip { font-size: 14.5px; }
       <span class="chip" onclick="quickSearch('돈의 심리학')">돈의 심리학</span>
       <span class="chip" onclick="quickSearch('흔한 남매')">흔한 남매</span>
     </div>
+    <div class="trending-section" id="trendingSection"></div>
 
     <div class="loading" id="bookLoading">
       <div class="loading-dots"><span></span><span></span><span></span></div>
@@ -1969,6 +2039,45 @@ function renderBookList(list, containerId) {
   list.forEach((book, i) => el.appendChild(makeCard(book, i)));
 }
 
+/* ══ 지금 뜨는 도서 ══ */
+const TRENDING_BOOKS = [
+  { title: "소년이 온다", img: null, searchKey: "소년이 온다" },
+  { title: "채식주의자", img: "https://image.aladin.co.kr/product/29137/2/cover/8936434594_1.jpg", searchKey: "소년이 온다" },
+  { title: "작별하지 않는다", img: "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg", searchKey: "소년이 온다" },
+  { title: "불편한 편의점", img: "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg", searchKey: "소년이 온다" },
+  { title: "돈의 심리학", img: "https://image.aladin.co.kr/product/25967/85/cover/k412737326_1.jpg", searchKey: "돈의 심리학" },
+  { title: "세이노의 가르침", img: "https://image.aladin.co.kr/product/30929/51/cover/k732831392_1.jpg", searchKey: "돈의 심리학" },
+];
+
+const TRENDING_COLORS = [
+  'radial-gradient(ellipse at 30% 70%, #ff1744 0%, #ff6d00 100%)',
+  'radial-gradient(ellipse at 70% 30%, #2979ff 0%, #00e5ff 100%)',
+  'radial-gradient(ellipse at 40% 80%, #d500f9 0%, #ff6d00 100%)',
+  'radial-gradient(ellipse at 60% 20%, #00bfa5 0%, #69f0ae 100%)',
+  'radial-gradient(ellipse at 20% 60%, #aa00ff 0%, #448aff 100%)',
+  'radial-gradient(ellipse at 80% 70%, #ff6d00 0%, #ffd740 100%)',
+];
+
+function renderTrending() {
+  const el = document.getElementById('trendingSection');
+  if (!el) return;
+  el.innerHTML = `<div class="trending-title">지금 뜨는 도서</div><div class="trending-scroll" id="trendingScroll"></div>`;
+  const scroll = document.getElementById('trendingScroll');
+  TRENDING_BOOKS.forEach((book, i) => {
+    const card = document.createElement('div');
+    card.className = 'trending-card';
+    card.onclick = () => quickSearch(book.searchKey);
+    const cover = book.img
+      ? `<img class="trending-cover" src="${book.img}" alt="${book.title}" onerror="this.outerHTML='<div class=\\'trending-cover-ph\\' style=\\'background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}\\'>${book.title.slice(0,10)}</div>'">`
+      : `<div class="trending-cover-ph" style="background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}">${book.title.slice(0,10)}</div>`;
+    card.innerHTML = `
+      ${cover}
+      <div class="trending-rank">${i + 1}</div>
+      <div class="trending-name">${book.title}</div>`;
+    scroll.appendChild(card);
+  });
+}
+
 /* ══════════════ 검색 (탭1) ══════════════ */
 function quickSearch(q) {
   document.getElementById('bookInput').value = q;
@@ -2591,6 +2700,7 @@ function detectMobile() {
 /* ══════════════ 초기화 ══════════════ */
 function init() {
   buildIndex();
+  renderTrending();
   renderTasteChips();
   renderShelfRows(null);
   renderSteadyRows();
