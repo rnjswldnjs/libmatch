@@ -2418,18 +2418,18 @@ function openBookModal(title) {
     coverWrap.innerHTML = `<img class="modal-cover" src="${book.img}" alt="${title}" onerror="this.className='modal-cover ph'; this.textContent='${title.slice(0,20)}'">`;
  } else {
     const colors = [
-    'linear-gradient(160deg, #ff3b30 0%, #ff6b35 100%)',      // 빨강-오렌지
-    'linear-gradient(160deg, #007aff 0%, #5856d6 100%)',      // 파랑-보라
-    'linear-gradient(160deg, #34c759 0%, #30b0c7 100%)',      // 초록-청록
-    'linear-gradient(160deg, #ff9500 0%, #ff3b30 100%)',      // 오렌지-빨강
-    'linear-gradient(160deg, #af52de 0%, #5856d6 100%)',      // 보라-인디고
-    'linear-gradient(160deg, #ff2d55 0%, #ff9500 100%)',      // 핑크-오렌지
-    'linear-gradient(160deg, #5ac8fa 0%, #007aff 100%)',      // 하늘-파랑
-    'linear-gradient(160deg, #ffcc00 0%, #ff9500 100%)',      // 노랑-오렌지
-    'linear-gradient(160deg, #ff6b6b 0%, #ee0979 100%)',      // 코랄-핑크
-    'linear-gradient(160deg, #0b3d91 0%, #1e90ff 100%)',      // 남색-파랑
-    'linear-gradient(160deg, #11998e 0%, #38ef7d 100%)',      // 청록-초록
-    'linear-gradient(160deg, #fc4a1a 0%, #f7b733 100%)',      // 레드-골드
+    'linear-gradient(160deg, #c94b4b 0%, #4b134f 100%)',      // 딥레드-퍼플
+    'linear-gradient(160deg, #1a237e 0%, #1565c0 50%, #0288d1 100%)',  // 네이비-블루
+    'linear-gradient(160deg, #bf360c 0%, #e64a19 50%, #ff8f00 100%)',  // 번트오렌지
+    'linear-gradient(160deg, #4a148c 0%, #7b1fa2 50%, #ab47bc 100%)',  // 딥퍼플
+    'linear-gradient(160deg, #006064 0%, #00838f 50%, #26c6da 100%)',  // 딥틸
+    'linear-gradient(160deg, #1b5e20 0%, #2e7d32 50%, #66bb6a 100%)',  // 딥그린
+    'linear-gradient(160deg, #880e4f 0%, #c2185b 50%, #f06292 100%)',  // 딥핑크
+    'linear-gradient(160deg, #e65100 0%, #f57c00 50%, #ffb300 100%)',  // 앰버
+    'linear-gradient(160deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%)',  // 로얄블루
+    'linear-gradient(160deg, #4e342e 0%, #6d4c41 50%, #a1887f 100%)',  // 브라운
+    'linear-gradient(160deg, #37474f 0%, #546e7a 50%, #90a4ae 100%)',  // 블루그레이
+    'linear-gradient(160deg, #1a237e 0%, #283593 50%, #7986cb 100%)',  // 인디고
     ];
     const color = colors[Math.abs(book.title.charCodeAt(0) * 3 + book.title.charCodeAt(1) * 7 + (book.title.charCodeAt(2) || 0) * 11) % colors.length];
     coverWrap.innerHTML = `<div class="modal-cover ph" style="background:${color}; background-size:200% 200%; animation:gradientMove 4s ease infinite;">${title.split(' :')[0].slice(0,15)}</div>`;
