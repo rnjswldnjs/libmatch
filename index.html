@@ -1262,12 +1262,11 @@ body.a11y .regenre .chip { font-size: 14.5px; }
 <div id="userView">
 
 <div class="hero">
-  <h1>다음에 읽을 책,<br><span class="accent">도서관 데이터</span>가 알고 있어요</h1>
-  <p>회원가입 없이, 대출이력 없이<br>전국 공공도서관 대출 패턴으로 추천합니다</p>
+  <h1>다음에 읽을 책,<br><span class="accent">도서관 데이터</span>가 찾아드려요</h1>
   <div class="hero-stats">
-    <span>전국 1,400개+ 도서관</span>
-    <span>대출 데이터 800권+</span>
-    <span>프라이버시 보존형 · 개인정보 수집 제로</span>
+    <span>전국 1,400개+ 도서관 데이터 활용</span>
+    <span>회원가입 없이 이용 가능</span>
+    <span>개인 대출 이력 없이 추천</span>
   </div>
   <div class="hero-scroll-hint" onclick="document.getElementById('homeSection').scrollIntoView({behavior:'smooth'})">
     오늘의 서가 둘러보기 ↓
@@ -1658,7 +1657,7 @@ function mk(title, genre, tags, imgKey) {
 /* ══ 재추천 풀 — 코랩 하이브리드 모델 실행 결과 (시드 도서별) ══ */
 const RE_SEED_POOL = {
   "채식주의자": [
-    mk("희랍어 시간 :한강 장편소설", "fiction", ["#소설","#한강","#코랩 추천"]),
+    mk("희랍어 시간 :한강 장편소설", "fiction", ["#소설","#한강", "치유", "로맨스"]),
     mk("채식주의자 :한강 장편소설", "fiction", ["#소설","#한강","#인터내셔널"], "채식주의자"),
     mk("작별하지 않는다 :한강 장편소설", "fiction", ["#소설","#한강","#인기도서"], "작별하지 않는다"),
     mk("천 개의 파랑 :천선란 장편소설", "fiction", ["#소설","#천선란","#SF"]),
@@ -1686,7 +1685,7 @@ const RE_SEED_POOL = {
   ],
   "사피엔스": [
     mk("정재승의 인류 탐험 보고서", "humanities", ["#인류","#어린이 교양","#정재승"]),
-    mk("명랑한 이시봉", "humanities", ["#교양","#코랩 추천"]),
+    mk("명랑한 이시봉", "humanities", ["#교양","기적", "반려인 필독서"]),
     mk("에그박사와 공룡 에그", "humanities", ["#공룡","#어린이 교양"]),
   ],
   "마흔에 읽는 쇼펜하우어": [
