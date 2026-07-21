@@ -242,7 +242,6 @@ header {
   max-width: 860px;
   margin: 0 auto;
   padding: 40px 24px 64px;
-  overflow: hidden;
 }
 .panel { display: none; }
 .panel.active { display: block; }
@@ -292,7 +291,7 @@ header {
   border-color: var(--mint);
 }
   /* 지금 뜨는 도서 */
-.trending-section { margin-bottom: 32px; overflow: hidden;}
+.trending-section { margin-bottom: 32px; margin-left: -24px; margin-right: -24px; padding: 0 24px; }
 .trending-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; color: var(--black); }
 .trending-scroll {
   display: flex;
@@ -1304,6 +1303,8 @@ body.a11y .regenre .chip { font-size: 14.5px; }
   .share-btn { justify-content: center; }
   .search-row { flex-direction: column; }
   .btn-primary { width: 100%; }
+  .search-hint { font-size: 11.5px; }
+  .search-hint .chip { font-size: 11.5px; padding: 4px 10px; }
 }
 </style>
 </head>
