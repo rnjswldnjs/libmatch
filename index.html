@@ -242,6 +242,7 @@ header {
   max-width: 860px;
   margin: 0 auto;
   padding: 40px 24px 64px;
+  overflow: hidden;
 }
 .panel { display: none; }
 .panel.active { display: block; }
@@ -291,7 +292,7 @@ header {
   border-color: var(--mint);
 }
   /* 지금 뜨는 도서 */
-.trending-section { margin-bottom: 32px; }
+.trending-section { margin-bottom: 32px; overflow: hidden;}
 .trending-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; color: var(--black); }
 .trending-scroll {
   display: flex;
@@ -343,7 +344,7 @@ header {
   font-weight: 900;
   color: var(--white);
   line-height: 1;
-  -webkit-text-stroke: 2px var(--gray-border);
+  -webkit-text-stroke: 2px var(--black);
   text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
   pointer-events: none;
 }
@@ -2069,8 +2070,7 @@ function renderTrending() {
     card.onclick = () => quickSearch(book.searchKey);
     const cover = book.img
       ? `<img class="trending-cover" src="${book.img}" alt="${book.title}" onerror="this.outerHTML='<div class=\\'trending-cover-ph\\' style=\\'background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}\\'>${book.title.slice(0,10)}</div>'">`
-      : `<div class="trending-cover-ph" style="background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}">${book.title.slice(0,10)}</div>`;
-    card.innerHTML = `
+      : `<div class="trending-cover-ph" style="background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}; font-size:18px; line-height:1.3;">${book.title.split(' :')[0]}</div>`;
       ${cover}
       <div class="trending-rank">${i + 1}</div>
       <div class="trending-name">${book.title}</div>`;
@@ -2612,7 +2612,7 @@ function makeShelfCard(book) {
     const mid = Math.ceil(words.length / 2);
     const line1 = words.slice(0, mid).join(' ');
     const line2 = words.slice(mid).join(' ');
-    coverEl = `<div class="shelf-cover shelf-ph" style="background:${color}; background-size:200% 200%;">${line1}<br>${line2}</div>`;
+    coverEl = `<div class="shelf-cover shelf-ph" style="background:${color}; background-size:200% 200%; font-size:20px;">${line1}<br>${line2}</div>`;
   }
 
   btn.innerHTML = `
