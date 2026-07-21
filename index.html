@@ -1410,7 +1410,7 @@ body.a11y .regenre .chip { font-size: 14.5px; }
         <span class="row-badge">전국 공공도서관 대출 상위</span>
       </div>
       <div>
-        <span class="period-label">1~9월</span>
+        <span class="period-label">1~9월</span> <span class="period-label" style="background:var(--mint-dark); color:white;">NOW</span>
         <div class="hscroll" id="steadyRow1"></div>
       </div>
       <div style="margin-top:20px;">
@@ -2418,15 +2418,19 @@ function openBookModal(title) {
     coverWrap.innerHTML = `<img class="modal-cover" src="${book.img}" alt="${title}" onerror="this.className='modal-cover ph'; this.textContent='${title.slice(0,20)}'">`;
  } else {
     const colors = [
-    'linear-gradient(120deg, #ff6b6b 0%, #ff9a44 30%, #ffcc80 60%, #ffa07a 100%)',
-    'linear-gradient(120deg, #2d6cdf 0%, #3ecfb2 30%, #56e0a0 60%, #a8edea 100%)',
-    'linear-gradient(120deg, #f953c6 0%, #ff6b6b 30%, #ff9a44 60%, #ffd200 100%)',
-    'linear-gradient(120deg, #1a1a5e 0%, #2d6cdf 30%, #56ccf2 60%, #a8edea 100%)',
-    'linear-gradient(120deg, #f7971e 0%, #ffd200 30%, #ffcc80 60%, #ff9a44 100%)',
-    'linear-gradient(120deg, #ee0979 0%, #ff6a00 30%, #ffd200 60%, #ff6b6b 100%)',
-    'linear-gradient(120deg, #134e5e 0%, #71b280 30%, #3ecfb2 60%, #a8edea 100%)',
-    'linear-gradient(120deg, #8e2de2 0%, #4a00e0 30%, #2d6cdf 60%, #56ccf2 100%)',
-  ];
+    'linear-gradient(160deg, #ff3b30 0%, #ff6b35 100%)',      // 빨강-오렌지
+    'linear-gradient(160deg, #007aff 0%, #5856d6 100%)',      // 파랑-보라
+    'linear-gradient(160deg, #34c759 0%, #30b0c7 100%)',      // 초록-청록
+    'linear-gradient(160deg, #ff9500 0%, #ff3b30 100%)',      // 오렌지-빨강
+    'linear-gradient(160deg, #af52de 0%, #5856d6 100%)',      // 보라-인디고
+    'linear-gradient(160deg, #ff2d55 0%, #ff9500 100%)',      // 핑크-오렌지
+    'linear-gradient(160deg, #5ac8fa 0%, #007aff 100%)',      // 하늘-파랑
+    'linear-gradient(160deg, #ffcc00 0%, #ff9500 100%)',      // 노랑-오렌지
+    'linear-gradient(160deg, #ff6b6b 0%, #ee0979 100%)',      // 코랄-핑크
+    'linear-gradient(160deg, #0b3d91 0%, #1e90ff 100%)',      // 남색-파랑
+    'linear-gradient(160deg, #11998e 0%, #38ef7d 100%)',      // 청록-초록
+    'linear-gradient(160deg, #fc4a1a 0%, #f7b733 100%)',      // 레드-골드
+    ];
     const color = colors[Math.abs(book.title.charCodeAt(0) * 3 + book.title.charCodeAt(1) * 7 + (book.title.charCodeAt(2) || 0) * 11) % colors.length];
     coverWrap.innerHTML = `<div class="modal-cover ph" style="background:${color}; background-size:200% 200%; animation:gradientMove 4s ease infinite;">${title.split(' :')[0].slice(0,15)}</div>`;
   }
