@@ -2071,6 +2071,7 @@ function renderTrending() {
     const cover = book.img
       ? `<img class="trending-cover" src="${book.img}" alt="${book.title}" onerror="this.outerHTML='<div class=\\'trending-cover-ph\\' style=\\'background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}\\'>${book.title.slice(0,10)}</div>'">`
       : `<div class="trending-cover-ph" style="background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}; font-size:18px; line-height:1.3;">${book.title.split(' :')[0]}</div>`;
+    card.innerHTML = `
       ${cover}
       <div class="trending-rank">${i + 1}</div>
       <div class="trending-name">${book.title}</div>`;
