@@ -360,6 +360,27 @@ header {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.trending-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+.trending-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gray-border);
+  background: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  color: var(--dark-gray);
+}
+.trending-nav-btn:hover { border-color: var(--mint); color: var(--mint-dark); } 
 
 /* 검색 결과 없음 가이드 */
 .no-result {
@@ -2067,7 +2088,13 @@ const TRENDING_COLORS = [
 function renderTrending() {
   const el = document.getElementById('trendingSection');
   if (!el) return;
-  el.innerHTML = `<div class="trending-title">지금 뜨는 도서</div><div class="trending-scroll" id="trendingScroll"></div>`;
+  el.innerHTML = `
+  <div class="trending-title">지금 뜨는 도서</div>
+  <div class="trending-scroll" id="trendingScroll"></div>
+  <div class="trending-nav">
+    <button class="trending-nav-btn" onclick="document.getElementById('trendingScroll').scrollBy({left:-220, behavior:'smooth'})">‹</button>
+    <button class="trending-nav-btn" onclick="document.getElementById('trendingScroll').scrollBy({left:220, behavior:'smooth'})">›</button>
+  </div>`;
   const scroll = document.getElementById('trendingScroll');
   TRENDING_BOOKS.forEach((book, i) => {
     const card = document.createElement('div');
