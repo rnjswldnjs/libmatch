@@ -382,7 +382,16 @@ header {
   flex-shrink: 0;
 }
 .trending-nav-btn:hover { border-color: var(--mint); color: var(--mint-dark); }
-
+.trending-card.selected .trending-rank {
+  color: var(--mint);
+  -webkit-text-stroke: 2px var(--mint-dark);
+}
+.trending-card.selected .trending-cover,
+.trending-card.selected .trending-cover-ph {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 28px rgba(62,207,178,0.3);
+}
+  
 /* 검색 결과 없음 가이드 */
 .no-result {
   border: 1.5px dashed var(--gray-border);
@@ -810,8 +819,11 @@ header {
   display: block;
 }
 .shelf-card:hover .shelf-cover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 16px 32px rgba(62,207,178,0.25);
+}
+.shelf-card:hover .shelf-title {
+  color: var(--mint-dark);
 }
 @keyframes gradientMove {
   0% { background-position: 0% 0%; }
@@ -2100,7 +2112,11 @@ function renderTrending() {
   TRENDING_BOOKS.forEach((book, i) => {
     const card = document.createElement('div');
     card.className = 'trending-card';
-    card.onclick = () => quickSearch(book.searchKey);
+    card.onclick = () => {
+      document.querySelectorAll('.trending-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      quickSearch(book.searchKey);
+    };
     const cover = book.img
       ? `<img class="trending-cover" src="${book.img}" alt="${book.title}" onerror="this.outerHTML='<div class=\\'trending-cover-ph\\' style=\\'background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}\\'>${book.title.slice(0,10)}</div>'">`
       : `<div class="trending-cover-ph" style="background:${TRENDING_COLORS[i % TRENDING_COLORS.length]}; font-size:18px; line-height:1.3;">${book.title.split(' :')[0]}</div>`;
@@ -2728,9 +2744,11 @@ function detectMobile() {
   if (window.innerWidth <= 768) {
     document.body.classList.add('mobile');
     document.getElementById('pcSwitch').style.display = 'block';
+  } else {
+    document.body.classList.remove('mobile');
+    document.getElementById('pcSwitch').style.display = 'none';
   }
 }
-
 /* ══════════════ 초기화 ══════════════ */
 function init() {
   buildIndex();
